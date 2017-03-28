@@ -1,4 +1,4 @@
-defmodule MyList do
+defmodule ListExt do
 
     # basecase: an empty list
     def flatten([]), do : []
