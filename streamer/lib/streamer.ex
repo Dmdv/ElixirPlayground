@@ -1,4 +1,6 @@
 defmodule Streamer do
+  defrecord M3U8, program_id: nil, path: nil, bandwidth: nil
+
   @moduledoc """
   Documentation for Streamer.
   From 'Meet Elixir on Pluralsight
@@ -6,10 +8,11 @@ defmodule Streamer do
 
   @doc """
 
-  Find streaming index in directory
-
-  you can iex -S mix
+  You can iex -S mix
   and then h Streamer.find_index to get the help
+  mix test
+
+  Find streaming index in directory
 
   Hello world.
 
@@ -27,8 +30,12 @@ defmodule Streamer do
     files = Path.join(directory, "*.m3u8")
     #Enum.find Path.wildcard(files), is_index?(&1)
     if file = Enum.find(Path.wildcard(files), fn(file) -> is_index?(file) end) do
-      Path.basename file
+      file
     end
+  end
+
+  def extract_m3u8(index_file) do
+    []
   end
 
   defp is_index?(file) do
