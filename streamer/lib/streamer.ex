@@ -1,5 +1,4 @@
 defmodule Streamer do
-  defrecord M3U8, program_id: nil, path: nil, bandwidth: nil
 
   @moduledoc """
   Documentation for Streamer.
@@ -12,6 +11,10 @@ defmodule Streamer do
   and then h Streamer.find_index to get the help
   mix test
 
+  mix test - this runs tests
+
+  r(Modulename) - this reloads module if it has changed
+
   Find streaming index in directory
 
   Hello world.
@@ -20,8 +23,13 @@ defmodule Streamer do
 
       iex> Streamer.hello
       :world
-
   """
+
+  require Record
+  require FileReader
+
+  Record.defrecord :M3U8, program_id: nil, path: nil, bandwidth: nil
+
   def hello do
     :world
   end
@@ -35,15 +43,22 @@ defmodule Streamer do
   end
 
   def extract_m3u8(index_file) do
-    []
-  end
-
-  defp is_index?(file) do
-    File.open! file, fn(pid) ->
-      IO.read(pid, 25) == "#EXTM3U\n#EXT-X-STREAM-INF"
+    File.open! index_file, fn (pid) ->
+      #Discard #EXTM3U
+      FileReader.readline(pid)
+      do_extract_m3u8(pid, [])
     end
   end
-  
+
+  def is_index?(file) do
+    File.open! file, fn(pid) ->
+      IO.read(pid, 26) == "#EXTM3U\r\n#EXT-X-STREAM-INF"
+    end
+  end
+
+  defp do_extract_m3u8(pid, acc) do
+  end
+
   # pattern matching over the rop of the file
   # private function
   # wrong function
