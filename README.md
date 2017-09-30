@@ -12,3 +12,6 @@ iex -S mix
 
 ### And then run elixir in the same directory with an expression to evaluate:
 elixir -e YourModule.sample
+
+##### Dependencies:
+https://crontab.guru
