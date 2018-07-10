@@ -1,4 +1,4 @@
-defmodule Sample.Cond do
+defmodule Conditions do
 
     def day(date) do
         cond do

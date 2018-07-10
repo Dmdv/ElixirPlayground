@@ -1,4 +1,4 @@
-defmodule Sample.Enum do
+defmodule TailRecursion do
     def first([]), do: nil
     def first([head |_]), do: head
 
